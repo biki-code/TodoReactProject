@@ -1,17 +1,24 @@
-import Button from "./Button";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todoData }) => {
+const TodoList = ({ todoData, handleSetCurrentTodo, setOperation }) => {
   return (
     <>
-      <Button buttonText={"Add"} twButtonBgColor={"bg-blue-600"} />
-      {todoData.map(({ title, deadline, status }) => (
-        <TodoItem
-          todoTitle={title}
-          todoDeadline={deadline}
-          itemStatus={status}
-        />
-      ))}
+      {todoData.map((todo, index) => {
+        const { title, deadline, status } = todo;
+
+        return (
+          <TodoItem
+            key={index}
+            todoTitle={title}
+            todoDeadline={deadline}
+            itemStatus={status}
+            handleSetCurrentTodo={() => {
+              handleSetCurrentTodo(todo, index);
+              setOperation("UPDATE");
+            }}
+          />
+        );
+      })}
     </>
   );
 };
