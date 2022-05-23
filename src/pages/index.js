@@ -1,7 +1,6 @@
 import TodoList from "../components/TodoList";
 import Modal from "../components/Modal";
 import { useState } from "react";
-import Button from "../components/Button";
 
 const Index = () => {
   const defaultTodo = {
@@ -14,11 +13,14 @@ const Index = () => {
   const [todoData, setTodoData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentTodo, setCurrentTodo] = useState(defaultTodo);
-  const [operation, setOperation] = useState(null)
+  const [operation, setOperation] = useState(null);
 
   const handleAddTodo = () => {
     console.log(currentTodo);
     setTodoData([...todoData, currentTodo]);
+
+    // reset currentTodo after adding
+    setCurrentTodo(defaultTodo);
   };
 
   const handleUpdateTodo = () => {
@@ -37,27 +39,41 @@ const Index = () => {
     setCurrentTodo({ title, status, deadline, index });
   };
 
+  const handleModalCancel = () => {
+    // reset currentTodo before closing the modal
+    setCurrentTodo(defaultTodo);
+    setModalIsOpen(false);
+  };
+
+  const handleModalAdd = () => {
+    // reset currentTodo after adding a new todo
+    handleAddTodo();
+    setModalIsOpen(false);
+  };
+
+  const handleModalUpdate = () => {
+    // reset currentTodo after updating a todo
+    handleUpdateTodo();
+    setModalIsOpen(false);
+  };
+
   return (
     <>
       <Modal
-        handleAddTodo={handleAddTodo}
-        handleUpdateTodo={handleUpdateTodo}
-        handleCloseModal={() => setModalIsOpen(false)}
+        handleModalCancel={handleModalCancel}
+        handleModalAdd={handleModalAdd}
+        handleModalUpdate={handleModalUpdate}
         currentTodo={currentTodo}
         setCurrentTodo={setCurrentTodo}
         modalIsOpen={modalIsOpen}
         operation={operation}
-        setOperation={setOperation}
       />
-      <Button
-        buttonText={"Add a new todo"}
-        twButtonBgColor={"bg-blue-600"}
-        handleOnClick={() => {setModalIsOpen(true); setOperation("ADD")}}
-      />
+
       <TodoList
         todoData={todoData}
         handleSetCurrentTodo={handleSetCurrentTodo}
         setOperation={setOperation}
+        setModalIsOpen={setModalIsOpen}
       />
     </>
   );

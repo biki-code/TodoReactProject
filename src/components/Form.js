@@ -1,9 +1,9 @@
 import Button from "./Button";
 
 const Form = ({
-  handleAddTodo,
-  handleUpdateTodo,
-  handleCloseModal,
+  handleModalCancel,
+  handleModalAdd,
+  handleModalUpdate,
   currentTodo,
   setCurrentTodo,
   operation,
@@ -90,20 +90,20 @@ const Form = ({
           <Button
             buttonText={"Cancel"}
             twButtonBgColor={"bg-gray-600"}
-            handleOnClick={handleCloseModal}
+            handleOnClick={handleModalCancel}
           />
 
           {operation === "ADD" ? (
             <Button
               buttonText={"Add"}
               twButtonBgColor={"bg-blue-600"}
-              handleOnClick={handleAddTodo}
+              handleOnClick={handleModalAdd}
             />
           ) : (
             <Button
               buttonText={"Update"}
               twButtonBgColor={"bg-blue-600"}
-              handleOnClick={handleUpdateTodo}
+              handleOnClick={handleModalUpdate}
             />
           )}
         </div>
