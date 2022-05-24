@@ -17,6 +17,14 @@ const Index = () => {
 
   const handleAddTodo = () => {
     console.log(currentTodo);
+
+    if (JSON.stringify(currentTodo) === JSON.stringify(defaultTodo)) {
+      alert(
+        `The Todo element is not correct. \nTitle: ${currentTodo.title} \nDeadline: ${currentTodo.deadline} \nStatus: ${currentTodo.status}`
+      );
+      return;
+    }
+
     setTodoData([...todoData, currentTodo]);
 
     // reset currentTodo after adding

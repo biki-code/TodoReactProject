@@ -9,8 +9,8 @@ const TodoList = ({
 }) => {
   return (
     <>
-      <div className="flex flex-col">
-        <div className="max-w-fit m-auto py-5">
+      <div className="flex flex-col w-4/6 m-auto">
+        <div className="max-w-fit py-5">
           <Button
             buttonText={"Add a new todo"}
             twButtonBgColor={"bg-blue-600"}
@@ -38,6 +38,24 @@ const TodoList = ({
             />
           );
         })}
+
+        <div className="flex mt-4">
+          <TodoItem
+            legendData={"Done"}
+            bgColor={"bg-white"}
+            itemStatus={"done"}
+          />
+          <TodoItem
+            legendData={"Not started"}
+            bgColor={"bg-white"}
+            itemStatus={"notStarted"}
+          />
+          <TodoItem
+            legendData={"In progress"}
+            bgColor={"bg-white"}
+            itemStatus={"inProgress"}
+          />
+        </div>
       </div>
     </>
   );
